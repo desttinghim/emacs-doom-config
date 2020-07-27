@@ -1,36 +1,6 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;; Place your private configuration here! Remember, you do not need to run 'doom
-;; refresh' after modifying this file!
-
-;; These are used for a number of things, particularly for GPG configuration,
-;; some email clients, file templates and snippets.
-(setq user-full-name "Louis Pearson"
-      user-mail-address "louispearson@librem.one")
-
-;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
-;; are the three important ones:
-;;
-;; + `doom-font'
-;; + `doom-variable-pitch-font'
-;; + `doom-big-font' -- used for `doom-big-font-mode'
-;;
-;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
-;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "monospace" :size 14))
-
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. These are the defaults.
-(setq doom-theme 'doom-one)
-
-;; If you intend to use org, it is recommended you change this!
-(setq org-directory "~/org/")
-
-;; If you want to change the style of line numbers, change this to `relative' or
-;; `nil' to disable it:
-(setq display-line-numbers-type 'relative)
-
+;; Remember, you do not need to run 'doom refresh' after modifying this file!
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -48,11 +18,57 @@
 ;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
 ;; they are implemented.
 
+;; These are used for a number of things, particularly for GPG configuration,
+;; some email clients, file templates and snippets.
+(setq user-full-name "Louis Pearson"
+      user-mail-address "louispearson@librem.one")
+
+(setq doom-font (font-spec :family "monospace" :size 14))
+(setq doom-theme 'doom-one)
+
+;; If you intend to use org, it is recommended you change this!
+;; Why?
+(setq org-directory "~/org/")
+
+(setq display-line-numbers-type 'relative)
+
 (map! :nv "C-c +" 'evil-numbers/inc-at-pt)
 (map! :nv "C-c -" 'evil-numbers/dec-at-pt)
 
-;; (setq mastodon-instance-url "https://social.librem.one")
 (setq auto-mode-alist (cons '("\\.dsp$" . faust-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.svelte$" . svelte-mode) auto-mode-alist))
 (setq browse-url-browser-function 'browse-url-firefox)
 (setq tramp-default-method "ssh")
+
+;; Easy hugo
+(setq easy-hugo-basedir "~/repos/desttinghim/desttinghim.gitlab.io/")
+(setq easy-hugo-url "https://desttinghim.name")
+(setq easy-hugo-sshdomain "ssh.phx.nearlyfreespeech.net")
+(setq easy-hugo-root "/home/public")
+(setq easy-hugo-previewtime "300")
+;; easy hugo is definitely not designed for vim and the way it tries to help you
+;; edit posts makes this very clear. I'll need to fiddle with it more to figure
+;; out if it will be a good match at all.
+(map! :map global-map :nv "C-c C-e" 'easy-hugo)
+(map! :map easy-hugo-mode-map
+      :nivm "n" 'easy-hugo-newpost
+      :nivm "D" 'easy-hugo-article
+      :nivm "p" 'easy-hugo-preview
+      :nivm "P" 'easy-hugo-publish
+      :nivm "o" 'easy-hugo-open
+      :nivm "d" 'easy-hugo-delete
+      :nivm "e" 'easy-hugo-open
+      :nivm "c" 'easy-hugo-open-config
+      :nivm "f" 'easy-hugo-open
+      :nivm "N" 'easy-hugo-no-help
+      :nivm "v" 'easy-hugo-view
+      :nivm "r" 'easy-hugo-refresh
+      :nivm "g" 'easy-hugo-refresh
+      :nivm "s" 'easy-hugo-sort-time
+      :nivm "S" 'easy-hugo-sort-char
+      :nivm "G" 'easy-hugo-github-deploy
+      :nivm "A" 'easy-hugo-amazon-s3-deploy
+      :nivm "C" 'easy-hugo-google-cloud-storage-deploy
+      :nivm "q" 'evil-delete-buffer
+      :nivm "TAB" 'easy-hugo-open
+      :nivm "RET" 'easy-hugo-preview)

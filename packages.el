@@ -58,3 +58,5 @@
 (package! svelte-mode)
 (package! emojify)
 (package! gdscript-mode)
+(package! easy-hugo)
+(package! format-all)
