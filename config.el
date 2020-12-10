@@ -24,7 +24,8 @@
       user-mail-address "louispearson@librem.one")
 
 (setq doom-font (font-spec :family "monospace" :size 14))
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-tomorrow-night)
+(setq evil-undo-system 'undo-redo)
 
 ;; If you intend to use org, it is recommended you change this!
 ;; Why?
@@ -37,15 +38,19 @@
 
 (setq auto-mode-alist (cons '("\\.dsp$" . faust-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.svelte$" . svelte-mode) auto-mode-alist))
+
 (setq browse-url-browser-function 'browse-url-firefox)
+
 (setq tramp-default-method "ssh")
 
+(setq projectile-project-search-path '("~/repos"))
+
 ;; Easy hugo
-(setq easy-hugo-basedir "~/repos/desttinghim/desttinghim.gitlab.io/")
-(setq easy-hugo-url "https://desttinghim.name")
-(setq easy-hugo-sshdomain "ssh.phx.nearlyfreespeech.net")
-(setq easy-hugo-root "/home/public")
-(setq easy-hugo-previewtime "300")
+(setq easy-hugo-basedir "~/repos/desttinghim/desttinghim.gitlab.io/"
+      easy-hugo-url "https://desttinghim.name"
+      easy-hugo-sshdomain "ssh.phx.nearlyfreespeech.net"
+      easy-hugo-root "/home/public"
+      easy-hugo-previewtime "300")
 ;; easy hugo is definitely not designed for vim and the way it tries to help you
 ;; edit posts makes this very clear. I'll need to fiddle with it more to figure
 ;; out if it will be a good match at all.
@@ -72,3 +77,19 @@
       :nivm "q" 'evil-delete-buffer
       :nivm "TAB" 'easy-hugo-open
       :nivm "RET" 'easy-hugo-preview)
+
+;; (setq auth-sources '("~/.authinfo.gpg"))
+;; (ghub-request "GET" "/user" nil
+;;               :forge 'gitlab
+;;               :host "gitlab.com/api/v4"
+;;               :username "desttinghim"
+;;               :auth 'ghub)
+
+(defun ediff-copy-both-to-C ()
+  (interactive)
+  (ediff-copy-diff ediff-current-difference nil 'C nil
+                   (concat
+                    (ediff-get-region-contents ediff-current-difference 'A ediff-control-buffer)
+                    (ediff-get-region-contents ediff-current-difference 'B ediff-control-buffer))))
+(defun add-d-to-ediff-mode-map () (define-key ediff-mode-map "d" 'ediff-copy-both-to-C))
+(add-hook 'ediff-keymap-setup-hook 'add-d-to-ediff-mode-map)

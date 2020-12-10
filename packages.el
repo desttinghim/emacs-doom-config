@@ -56,7 +56,11 @@
 (package! faust-mode)
 (package! glsl-mode)
 (package! svelte-mode)
-(package! emojify)
+;; (package! emojify)
 (package! gdscript-mode)
-(package! easy-hugo)
+;; (package! easy-hugo)
 (package! format-all)
+(package! evil-snipe)
+;; (package! ox-hugo)
+(package! rgbds-mode
+  :recipe (:host github :repo "japanoise/rgbds-mode"))
