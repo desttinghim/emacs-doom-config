@@ -25,7 +25,6 @@
 
 (setq doom-font (font-spec :family "monospace" :size 14))
 (setq doom-theme 'doom-tomorrow-night)
-(setq evil-undo-system 'undo-redo)
 
 ;; If you intend to use org, it is recommended you change this!
 ;; Why?
